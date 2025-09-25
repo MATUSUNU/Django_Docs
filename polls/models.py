@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 import datetime
 
+from django.contrib import admin
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -16,8 +18,17 @@ class Question(models.Model):
     #     return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
     # bug fixed
+    # def was_published_recently(self):
+    #     # Was this published within the last 24 hours?
+    #     now = timezone.now()
+    #     return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+    @admin.display(
+        boolean=True,
+        ordering="pub_date",
+        description="Published recently?",
+    )
     def was_published_recently(self):
-        # Was this published within the last 24 hours?
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
