@@ -40,3 +40,39 @@ We also specify the template_name for the results list view – this ensures tha
 even though they’re both a DetailView behind the scenes.
 Similarly, the ListView generic view uses a default template called <app name>/<model name>_list.html;
 we use template_name to tell ListView to use our existing "polls/index.html" template.
+
+What are automated tests?
+Tests are routines that check the operation of your code.
+What’s different in automated tests is that the testing work is done for you by the system. You create a set of tests once,
+and then as you make changes to your app, you can check that your code still works as you originally intended,
+without having to perform time consuming manual testing.
+
+Basic testing strategies
+There are many ways to approach writing tests.
+
+**Test-Driven Development (TDD)** is a software development approach where you:
+1. **Write a test** for a small piece of functionality before writing the code.
+2. **Write the minimal code** needed to pass that test.
+3. **Refactor** the code while keeping the test green (passing).
+🔁 Repeat this cycle to build up your application.
+In short:
+> **“Red → Green → Refactor”**
+
+We identify a bug¶
+Fortunately, there’s a little bug in the polls application for us to fix right away:
+the Question.was_published_recently() method returns True if the Question was published within the last day (which is correct) but
+also if the Question’s pub_date field is in the future (which certainly isn’t).
+
+The Django test client
+```
+$ python manage.py shell
+>>> from django.test.utils import setup_test_environment
+>>> setup_test_environment()
+```
+
+Further testing
+For example, while our tests here have covered some of the internal logic of a model and the way our views publish information,
+you can use an “in-browser” framework such as Selenium to test the way your HTML actually renders in a browser.
+These tools allow you to check not just the behavior of your Django code, but also, for example, of your JavaScript.
+It’s quite something to see the tests launch a browser, and start interacting with your site, as if a human being were driving it!
+Django includes LiveServerTestCase to facilitate integration with tools like Selenium.
