@@ -13,3 +13,11 @@ because they don’t have to be tied to a given Django installation.
 
 By running makemigrations, you’re telling Django that you’ve made some changes to your models
 There’s a command that will run the migrations for you and manage your database schema automatically - that’s called migrate
+
+By convention DjangoTemplates looks for a “templates” subdirectory in each of the INSTALLED_APPS.
+
+Namespacing URL names:
+The tutorial project has just one app, polls. In real Django projects, there might be five, ten, twenty apps or more.
+How does Django differentiate the URL names between them?
+For example, the polls app has a detail view, and so might an app on the same project that is for a blog.
+How does one make it so that Django knows which app view to create for a url when using the {% url %} template tag?
