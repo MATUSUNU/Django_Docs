@@ -1,0 +1,15 @@
+If you’re interested, run the command-line client for your database and type \dt (PostgreSQL),
+SHOW TABLES; (MariaDB, MySQL), .tables (SQLite), or SELECT TABLE_NAME FROM USER_TABLES; (Oracle)
+to display the tables Django created.
+
+In our poll app, we’ll create two models:
+Question and Choice.
+A Question has a question and a publication date.
+A Choice has two fields: the text of the choice and a vote tally.
+Each Choice is associated with a Question.
+
+Django apps are “pluggable”: You can use an app in multiple projects, and you can distribute apps,
+because they don’t have to be tied to a given Django installation.
+
+By running makemigrations, you’re telling Django that you’ve made some changes to your models
+There’s a command that will run the migrations for you and manage your database schema automatically - that’s called migrate
